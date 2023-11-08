@@ -1,31 +1,3 @@
-<?php
-
-$host = 'localhost';
-$dbname = 'saucisse';
-$username = 'root';
-$password = '';
-
-try {
-
-  $pdo = new PDO(
-    'mysql:host=' . $host . ';dbname=' . $dbname,
-    $username,
-    $password,
-    array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8')
-  );
-
-  // echo "Connected to $dbname on $host with success";
-
-} catch (PDOException $e) {
-
-  die("Can't connect to $dbname :" . $e->getMessage());
-}
-
-
-$request = $pdo->query('SELECT name FROM sauce WHERE id = 1');
-$sauce = $request->fetch(PDO::FETCH_ASSOC);
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,8 +15,9 @@ $sauce = $request->fetch(PDO::FETCH_ASSOC);
 
 <script>
 
-  function getSauceName() {
-    fetch("getSauceName.php")
+  function getSauceName(requiredId) {
+    let url = "getSauceById.php?id=" + requiredId;
+    fetch(url, { method: 'GET' })
       .then((response) => {
         // Before parsing (i.e. decoding) the JSON data
         if (!response.ok) {
@@ -66,7 +39,7 @@ $sauce = $request->fetch(PDO::FETCH_ASSOC);
       });
   }
 
-  getSauceName();
+  getSauceName(1);
 
 
   function createNewSauce(sauceName) {
@@ -80,7 +53,7 @@ $sauce = $request->fetch(PDO::FETCH_ASSOC);
         return response.text
       })
   }
-  const unTexte = "na^$kejenkie";
+  const unTexte = "Nom du nouvel utilisateur";
   createNewSauce(unTexte);
 
 
