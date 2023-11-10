@@ -1,8 +1,10 @@
 <?php
-$host = 'localhost';
-$dbname = 'saucisse';
-$username = 'root';
-$password = '';
+$dbconfig = parse_ini_file("config.env");
+
+$host = $dbconfig["DB_HOST"];
+$dbname = $dbconfig["DB_NAME"];
+$username = $dbconfig["DB_USERNAME"];
+$password = $dbconfig["DB_PASSWORD"];
 
 try {
 
