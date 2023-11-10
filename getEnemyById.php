@@ -27,6 +27,7 @@ if (isset($_GET["id"])) {
   // Bind the id within the placeholder
   $request->bindParam(':enemyId', $enemyId, PDO::PARAM_STR);
 
+
   // Send the request to the database
   $enemy = $request->execute();
   $enemy = $request->fetch(PDO::FETCH_ASSOC);

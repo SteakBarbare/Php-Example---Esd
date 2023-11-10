@@ -15,8 +15,32 @@
 
 <script>
 
-  function getSauceName(requiredId) {
-    let url = "getSauceById.php?id=" + requiredId;
+  function getSceneById(Id) {
+    let url = "getSceneId.php?id=" + Id;
+    fetch(url, { method: "GET" })
+      .then((response) => {
+        // Before parsing (i.e. decoding) the JSON data
+        if (!response.ok) {
+          // check for any errors.
+          // In case of an error, throw.
+          throw new Error("Something went wrong!");
+        }
+        let parsedResponse = response.json();
+        return parsedResponse; // Parse the JSON data.
+      })
+      .then((data) => {
+        // This is where you handle what to do with the response.
+        console.log(data);
+        return data;
+      })
+      .catch((error) => {
+        // This is where you handle errors.
+      });
+  }
+  getSceneById(1);
+
+  function getEnemyById(requiredId) {
+    let url = "getEnemyById.php?id=" + requiredId;
     fetch(url, { method: 'GET' })
       .then((response) => {
         // Before parsing (i.e. decoding) the JSON data
@@ -39,8 +63,26 @@
       });
   }
 
-  getSauceName(1);
+  getEnemyById(1);
 
+  function getNames() {
+    fetch('getPoil.php')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        let parsedResponse = response.json();
+        return parsedResponse;
+      })
+      .then((data) => {
+        console.log(data);
+        return data;
+      })
+      .catch((error) => {
+        console.log('There has been a problem:', error);
+      });
+  }
+  getNames();
 
   function createNewSauce(sauceName) {
     let url = "createNewSauce.php";

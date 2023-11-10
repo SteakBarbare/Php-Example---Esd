@@ -28,8 +28,4 @@ if (isset($_POST["name"])) {
   echo "C KC";
 }
 
-// $request = $pdo->query('SELECT name FROM sauce WHERE id = 1');
-// $sauce = $request->fetch(PDO::FETCH_ASSOC);
-
-// echo json_encode($sauce['name']);
 ?>
